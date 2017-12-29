@@ -1,9 +1,11 @@
 RSpec.describe Blockchainable do
-  it "has a version number" do
-    expect(Blockchainable::VERSION).not_to be nil
-  end
+  it 'does something useful' do
+    chained_model = ChainedModel.new
 
-  it "does something useful" do
-    expect(false).to eq(true)
+    expect(chained_model.hash).to be nil
+
+    chained_model.hash!
+
+    expect(chained_model.hash).not_to be nil
   end
 end

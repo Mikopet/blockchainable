@@ -1,8 +1,6 @@
 # Blockchainable
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/blockchainable`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-TODO: Delete this and the text above, and describe your gem
+This gem is usable for making blockchains from database through models in Rails. 
 
 ## Installation
 
@@ -22,7 +20,27 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+In the model you want to be blockchainable, just write:
+
+```ruby
+include Blockchainable
+```
+
+And add the input data for the hashes:
+
+```ruby
+hash_data :id, :created_at, :more_datas
+```
+
+If you want to hash with the previous block (and sure you want), you need to define a method for that, something like this:
+
+```ruby
+def previous_hash
+  self.class.where('id < ?', id).limit(1).offset(1).order('id DESC').first&.hash
+end
+```
+
+And add it to hash_data
 
 ## Development
 
@@ -32,7 +50,7 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/blockchainable. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
+Bug reports and pull requests are welcome on GitHub at https://github.com/Mikopet/blockchainable. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
 
 ## License
 
